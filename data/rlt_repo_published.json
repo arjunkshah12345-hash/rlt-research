@@ -1,0 +1,14 @@
+{
+  "note": "Preliminary synthetic results published in the RLT repo (contributed by @AradhyeAgarwal). ~79K params, 3 seeds, train 32 ops, eval 2048 programs per length. Values marked ~ are approximate readings from their figure; RLT 128-op values are from figure labels. FLOPs were NOT matched.",
+  "chance": {"parity": 50, "five": 20},
+  "parity": {
+    "rlt":         {"16": 100, "32": 100, "64": 82,  "128": 60.8},
+    "transformer": {"16": 98,  "32": 72,  "64": 50,  "128": 48},
+    "token_merge": {"16": 98,  "32": 59,  "64": 49,  "128": 50}
+  },
+  "five": {
+    "rlt":         {"16": 100, "32": 100, "64": 49, "128": 20.7},
+    "transformer": {"16": 54,  "32": 24,  "64": 20, "128": 21},
+    "token_merge": {"16": 50,  "32": 23,  "64": 20, "128": 20}
+  }
+}

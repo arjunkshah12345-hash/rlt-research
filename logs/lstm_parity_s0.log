@@ -1,0 +1,31 @@
+[lstm/parity/s0] params=75648
+  step 0 loss 1.4084
+  step 500 loss 0.0001
+  step 1000 loss 0.0000
+  step 1500 loss 0.0000
+  step 2000 loss 0.0000
+{
+  "model": "lstm",
+  "task": "parity",
+  "seed": 0,
+  "params": 75648,
+  "steps": 2500,
+  "batch": 64,
+  "train_ops": 32,
+  "supervision": "dense_running_parity",
+  "acc": {
+    "16": 100.0,
+    "32": 100.0,
+    "64": 100.0,
+    "128": 100.0
+  },
+  "eval_ms_per_program": {
+    "16": 0.11709975194662547,
+    "32": 0.2954441528402185,
+    "64": 0.5943935141772272,
+    "128": 1.1728548379039694
+  },
+  "train_ms_per_step": 57.62009760073852,
+  "final_loss": 1.3384712301558466e-05,
+  "train_seconds": 138.40059241600102
+}

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RLT at matched parameters: an independent benchmark</title>
+<meta name="description" content="Six architectures from 1990 to 2026, matched to 75K to 84K parameters, on the RLT paper's state-tracking tasks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..600&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet" referrerpolicy="no-referrer">
+<link href="assets/vercel-brand.css" rel="stylesheet">
+<style>
+  /* Page-owned CSS: page-specific geometry only, built from public vbg tokens. */
+  .vbg-custom-plot svg { display: block; width: 100%; height: auto; }
+  .vbg-viz-mean { stroke: var(--vbg-text-primary); stroke-width: 2; }
+  .vbg-viz-chance-label { font-size: 10px; }
+  .vbg-viz-axis-title { font-size: 11px; }
+</style>
+</head>
+
+<body class="vbg-report">
+<div class="vbg-shell">
+  <a class="vbg-skip-link" href="#main">Skip to content</a>
+  <header class="vbg-header">
+    <div class="vbg-masthead">
+      <div class="vbg-document-meta">
+        <span class="vbg-context">Independent benchmark</span>
+        <span class="vbg-date">September 15, 2026</span>
+      </div>
+    </div>
+  </header>
+  <main id="main">
+
+<section class="vbg-opening">
+  <div class="vbg-opening-claim">
+    <h1 class="vbg-title">At matched parameters, a recurrent network from 1990 beats a looped transformer from 2026</h1>
+    <p class="vbg-lede">The RLT paper warns that parallel transformers fail the state-tracking tasks that recurrent
+    models solve. We replicated the comparison with six architectures, matched to 75,000 to 84,000 parameters and one
+    identical training budget. The warning holds, but the credit goes to recurrence itself: the simplest network
+    tested wins both tasks at every evaluation length, and the looping machinery adds cost without adding accuracy
+    at this scale.</p>
+  </div>
+  <div class="vbg-opening-proof"><div class="vbg-stat-strip"><div class="vbg-stat"><p class="vbg-stat-label">Architectures</p><p class="vbg-stat-value">6</p><p class="vbg-stat-detail">Elman 1990 to RLT-style 2026</p></div><div class="vbg-stat"><p class="vbg-stat-label">Runs</p><p class="vbg-stat-value">36</p><p class="vbg-stat-detail">6 models, 2 tasks, 3 seeds</p></div><div class="vbg-stat"><p class="vbg-stat-label">Parameter budget</p><p class="vbg-stat-value">75K to 84K</p><p class="vbg-stat-detail">Matched across all models</p></div><div class="vbg-stat"><p class="vbg-stat-label">Training budget</p><p class="vbg-stat-value">2,500 steps</p><p class="vbg-stat-detail">Identical for every run</p></div></div></div>
+  <div class="vbg-opening-context">
+    <p>RLT (Recurrent Looped Transformer, Yifan Zhang, September 2026) wraps a standard transformer block stack in a
+    loop that runs once per token, giving each state a much longer path through the network. After training, the
+    loop unrolls back into an ordinary parallel transformer, so inference stays fast. The paper reports that
+    parallel transformers crash on long state-tracking programs while RLT holds, and prices the difference in
+    parameters instead of FLOPs (<a href="https://github.com/yifanzhang-pro/recurrent-looped-transformer">paper and code</a>).</p>
+  </div>
+</section>
+
+<section class="vbg-section">
+  <h2 class="vbg-heading-24">At the trained length, only the parallel transformer fails</h2>
+  <p class="vbg-lede">Accuracy at 32 operations, the length every model trained on, on a shared 0 to 100 scale.
+  Each bar is the mean of three seeds.</p>
+  <div class="vbg-grid">
+    <div class="vbg-span-6">
+      <h3 class="vbg-heading-16">Parity</h3>
+      <div class="vbg-bar-list"><div class="vbg-bar"><span class="vbg-bar-label">Elman RNN, 1990</span><span class="vbg-bar-value">100.0</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:100.0000%"></div></div></div><div class="vbg-bar"><span class="vbg-bar-label">LSTM, 1997</span><span class="vbg-bar-value">81.2</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:81.2012%"></div></div></div><div class="vbg-bar"><span class="vbg-bar-label">GRU, 2014</span><span class="vbg-bar-value">98.3</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:98.3073%"></div></div></div><div class="vbg-bar"><span class="vbg-bar-label">Transformer, 2017</span><span class="vbg-bar-value">46.9</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:46.8750%"></div></div></div><div class="vbg-bar"><span class="vbg-bar-label">Token merge (ablation)</span><span class="vbg-bar-value">76.4</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:76.4486%"></div></div></div><div class="vbg-bar"><span class="vbg-bar-label">RLT-style, 2026</span><span class="vbg-bar-value">67.0</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:67.0085%"></div></div></div></div>
+    </div>
+    <div class="vbg-span-6">
+      <h3 class="vbg-heading-16">Five-state composition</h3>
+      <div class="vbg-bar-list"><div class="vbg-bar"><span class="vbg-bar-label">Elman RNN, 1990</span><span class="vbg-bar-value">98.6</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:98.6003%"></div></div></div><div class="vbg-bar"><span class="vbg-bar-label">LSTM, 1997</span><span class="vbg-bar-value">98.7</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:98.6654%"></div></div></div><div class="vbg-bar"><span class="vbg-bar-label">GRU, 2014</span><span class="vbg-bar-value">98.6</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:98.5514%"></div></div></div><div class="vbg-bar"><span class="vbg-bar-label">Transformer, 2017</span><span class="vbg-bar-value">37.3</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:37.3210%"></div></div></div><div class="vbg-bar"><span class="vbg-bar-label">Token merge (ablation)</span><span class="vbg-bar-value">98.8</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:98.7630%"></div></div></div><div class="vbg-bar"><span class="vbg-bar-label">RLT-style, 2026</span><span class="vbg-bar-value">98.4</span><div class="vbg-bar-track"><div class="vbg-bar-fill" style="width:98.3887%"></div></div></div></div>
+    </div>
+  </div>
+  <p class="vbg-note">Chance is 50% on parity and 20% on five-state. The transformer sits at chance on parity and
+  reaches 37% on five-state; every recurrent architecture, including the 1990 Elman network, clears 76%.</p>
+</section>
+
+<section class="vbg-section">
+  <h2 class="vbg-heading-24">The mean is a fair summary for five models, and unfair for two</h2>
+  <p class="vbg-lede">Averaging three seeds makes the looped models look mid-tier when they are actually a
+  coin-flip between solving the task and staying at chance.</p>
+  
+<figure class="vbg-chart">
+  <div class="vbg-chart-header">
+    <h3 class="vbg-heading-16">Seeds disagree about the looped models on parity</h3>
+  </div>
+  <div class="vbg-chart-viewport vbg-custom-plot" tabindex="0"><svg viewBox="0 0 760 330" role="img" aria-label="Dot plot: accuracy of six models on two tasks, three dots per model for three seeds, mean tick, chance marked with a dashed line."><line class="vbg-chart-gridline" x1="70" y1="280.0" x2="360" y2="280.0"/><text x="62" y="283.0" text-anchor="end" font-size="10" fill="var(--vbg-text-secondary)">0</text><line class="vbg-chart-gridline" x1="70" y1="220.0" x2="360" y2="220.0"/><text x="62" y="223.0" text-anchor="end" font-size="10" fill="var(--vbg-text-secondary)">25</text><line class="vbg-chart-gridline" x1="70" y1="160.0" x2="360" y2="160.0"/><text x="62" y="163.0" text-anchor="end" font-size="10" fill="var(--vbg-text-secondary)">50</text><line class="vbg-chart-gridline" x1="70" y1="100.0" x2="360" y2="100.0"/><text x="62" y="103.0" text-anchor="end" font-size="10" fill="var(--vbg-text-secondary)">75</text><line class="vbg-chart-gridline" x1="70" y1="40.0" x2="360" y2="40.0"/><text x="62" y="43.0" text-anchor="end" font-size="10" fill="var(--vbg-text-secondary)">100</text><line class="vbg-chart-axis" x1="70" y1="280" x2="360" y2="280"/><line class="vbg-chart-annotation-line" x1="70" y1="160.0" x2="360" y2="160.0"/><text class="vbg-viz-chance-label" x="356" y="155.0" text-anchor="end" fill="var(--vbg-text-secondary)">chance 50</text><text class="vbg-viz-axis-title" x="215" y="24" text-anchor="middle" fill="var(--vbg-text-primary)">Parity</text><circle class="vbg-data-point" cx="94.2" cy="40.0" r="4"/><circle class="vbg-data-point" cx="94.2" cy="40.0" r="4"/><circle class="vbg-data-point" cx="94.2" cy="40.0" r="4"/><line class="vbg-viz-mean" x1="85.2" y1="40.0" x2="103.2" y2="40.0"/><text x="94.2" y="296" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">Elman RNN</text><circle class="vbg-data-point" cx="142.5" cy="112.8" r="4"/><circle class="vbg-data-point" cx="142.5" cy="102.6" r="4"/><circle class="vbg-data-point" cx="142.5" cy="40.0" r="4"/><line class="vbg-viz-mean" x1="133.5" y1="85.1" x2="151.5" y2="85.1"/><text x="142.5" y="310" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">LSTM</text><circle class="vbg-data-point" cx="190.8" cy="48.1" r="4"/><circle class="vbg-data-point" cx="190.8" cy="44.1" r="4"/><circle class="vbg-data-point" cx="190.8" cy="40.0" r="4"/><line class="vbg-viz-mean" x1="181.8" y1="44.1" x2="199.8" y2="44.1"/><text x="190.8" y="296" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">GRU</text><circle class="vbg-data-point" cx="239.2" cy="169.6" r="4"/><circle class="vbg-data-point" cx="239.2" cy="166.7" r="4"/><circle class="vbg-data-point" cx="239.2" cy="166.2" r="4"/><line class="vbg-viz-mean" x1="230.2" y1="167.5" x2="248.2" y2="167.5"/><text x="239.2" y="310" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">Transformer</text><circle class="vbg-data-point" cx="287.5" cy="166.0" r="4"/><circle class="vbg-data-point" cx="287.5" cy="78.0" r="4"/><circle class="vbg-data-point" cx="287.5" cy="45.6" r="4"/><line class="vbg-viz-mean" x1="278.5" y1="96.5" x2="296.5" y2="96.5"/><text x="287.5" y="296" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">Token merge (ablation)</text><circle class="vbg-data-point" cx="335.8" cy="157.8" r="4"/><circle class="vbg-data-point" cx="335.8" cy="117.2" r="4"/><circle class="vbg-data-point" cx="335.8" cy="82.5" r="4"/><line class="vbg-viz-mean" x1="326.8" y1="119.2" x2="344.8" y2="119.2"/><text x="335.8" y="310" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">RLT-style</text><line class="vbg-chart-gridline" x1="430" y1="280.0" x2="720" y2="280.0"/><text x="422" y="283.0" text-anchor="end" font-size="10" fill="var(--vbg-text-secondary)">0</text><line class="vbg-chart-gridline" x1="430" y1="220.0" x2="720" y2="220.0"/><text x="422" y="223.0" text-anchor="end" font-size="10" fill="var(--vbg-text-secondary)">25</text><line class="vbg-chart-gridline" x1="430" y1="160.0" x2="720" y2="160.0"/><text x="422" y="163.0" text-anchor="end" font-size="10" fill="var(--vbg-text-secondary)">50</text><line class="vbg-chart-gridline" x1="430" y1="100.0" x2="720" y2="100.0"/><text x="422" y="103.0" text-anchor="end" font-size="10" fill="var(--vbg-text-secondary)">75</text><line class="vbg-chart-gridline" x1="430" y1="40.0" x2="720" y2="40.0"/><text x="422" y="43.0" text-anchor="end" font-size="10" fill="var(--vbg-text-secondary)">100</text><line class="vbg-chart-axis" x1="430" y1="280" x2="720" y2="280"/><line class="vbg-chart-annotation-line" x1="430" y1="232.0" x2="720" y2="232.0"/><text class="vbg-viz-chance-label" x="716" y="227.0" text-anchor="end" fill="var(--vbg-text-secondary)">chance 20</text><text class="vbg-viz-axis-title" x="575" y="24" text-anchor="middle" fill="var(--vbg-text-primary)">Five-state composition</text><circle class="vbg-data-point" cx="454.2" cy="49.7" r="4"/><circle class="vbg-data-point" cx="454.2" cy="40.2" r="4"/><circle class="vbg-data-point" cx="454.2" cy="40.1" r="4"/><line class="vbg-viz-mean" x1="445.2" y1="43.4" x2="463.2" y2="43.4"/><text x="454.2" y="296" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">Elman RNN</text><circle class="vbg-data-point" cx="502.5" cy="48.3" r="4"/><circle class="vbg-data-point" cx="502.5" cy="41.2" r="4"/><circle class="vbg-data-point" cx="502.5" cy="40.1" r="4"/><line class="vbg-viz-mean" x1="493.5" y1="43.2" x2="511.5" y2="43.2"/><text x="502.5" y="310" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">LSTM</text><circle class="vbg-data-point" cx="550.8" cy="49.5" r="4"/><circle class="vbg-data-point" cx="550.8" cy="40.8" r="4"/><circle class="vbg-data-point" cx="550.8" cy="40.1" r="4"/><line class="vbg-viz-mean" x1="541.8" y1="43.5" x2="559.8" y2="43.5"/><text x="550.8" y="296" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">GRU</text><circle class="vbg-data-point" cx="599.2" cy="208.4" r="4"/><circle class="vbg-data-point" cx="599.2" cy="185.0" r="4"/><circle class="vbg-data-point" cx="599.2" cy="177.9" r="4"/><line class="vbg-viz-mean" x1="590.2" y1="190.4" x2="608.2" y2="190.4"/><text x="599.2" y="310" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">Transformer</text><circle class="vbg-data-point" cx="647.5" cy="48.3" r="4"/><circle class="vbg-data-point" cx="647.5" cy="40.4" r="4"/><circle class="vbg-data-point" cx="647.5" cy="40.2" r="4"/><line class="vbg-viz-mean" x1="638.5" y1="43.0" x2="656.5" y2="43.0"/><text x="647.5" y="296" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">Token merge (ablation)</text><circle class="vbg-data-point" cx="695.8" cy="49.3" r="4"/><circle class="vbg-data-point" cx="695.8" cy="42.2" r="4"/><circle class="vbg-data-point" cx="695.8" cy="40.1" r="4"/><line class="vbg-viz-mean" x1="686.8" y1="43.9" x2="704.8" y2="43.9"/><text x="695.8" y="310" text-anchor="middle" font-size="10" fill="var(--vbg-text-secondary)">RLT-style</text><text class="vbg-viz-axis-title" x="16" y="160" text-anchor="middle" fill="var(--vbg-text-secondary)" transform="rotate(-90 16 160)">Accuracy (%)</text></svg></div>
+  <figcaption class="vbg-caption">Each dot is one seed at 32 operations, the trained length; the tick is the
+  three-seed mean; the dashed line is chance. On parity, RLT-style spans 50.9 to 82.3 percent
+  across seeds and token merge spans 47.5 to 97.7, while the transformer sits at chance. On
+  five-state composition, every recurrent model clears 96% on every seed. Mean values hide both instabilities.</figcaption>
+</figure>
+
+</section>
+
+<section class="vbg-section">
+  <h2 class="vbg-heading-24">Looping costs four times more training compute</h2>
+  <p class="vbg-lede">Wall-clock per training step, measured on the same machine in the same sweep.</p>
+  <div class="vbg-table-wrap">
+    <table>
+      <caption class="vbg-visually-hidden">Parameters and training wall-clock per step for each model.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Model</th>
+          <th scope="col" class="vbg-numeric">Parameters</th>
+          <th scope="col" class="vbg-numeric">ms per training step</th>
+          <th scope="col" class="vbg-numeric">Relative to transformer</th>
+        </tr>
+      </thead>
+      <tbody><tr><th scope="row">Elman RNN</th><td class="vbg-numeric">76,416</td><td class="vbg-numeric">47.7</td><td class="vbg-numeric">0.6&times;</td></tr><tr><th scope="row">LSTM</th><td class="vbg-numeric">75,648</td><td class="vbg-numeric">57.9</td><td class="vbg-numeric">0.7&times;</td></tr><tr><th scope="row">GRU</th><td class="vbg-numeric">78,624</td><td class="vbg-numeric">59.2</td><td class="vbg-numeric">0.7&times;</td></tr><tr><th scope="row">Transformer</th><td class="vbg-numeric">77,280</td><td class="vbg-numeric">83.0</td><td class="vbg-numeric">1.0&times;</td></tr><tr><th scope="row">Token merge (ablation)</th><td class="vbg-numeric">83,552</td><td class="vbg-numeric">222.8</td><td class="vbg-numeric">2.7&times;</td></tr><tr><th scope="row">RLT-style</th><td class="vbg-numeric">75,000</td><td class="vbg-numeric">357.1</td><td class="vbg-numeric">4.3&times;</td></tr></tbody>
+    </table>
+  </div>
+  <p class="vbg-note">A trained RLT model runs as a standard parallel transformer, so the sequential cost applies
+  to training only. All runs shared one machine and ran six at a time, so absolute milliseconds carry contention;
+  the ratios were stable across isolated spot checks.</p>
+</section>
+
+<section class="vbg-band" data-tone="contrast">
+  <h2 class="vbg-heading-24">What we conclude</h2>
+  <p>The paper's central warning replicates. Given the same parameters and the same 2,500-step budget, the parallel
+  transformer sits at chance on parity and reaches 37% on five-state composition, while every recurrent
+  architecture, gated or not, solves both tasks.</p>
+  <p>The wins belong to recurrence, not to loops. The Elman network, one tanh layer with no gates, scores 100% on
+  both tasks at every evaluation length up to four times the training length. RLT-style also solves the tasks, but
+  it is the slowest model tested, unstable across seeds on parity, and never better than the simplest baseline at
+  this scale.</p>
+  <p>What we cannot rule out is scale. The paper's claims are made at 10M+ parameters with 48 loop iterations; a
+  75K-parameter probe can confirm the direction of the argument, not the payoff of the machinery. Loop-free
+  inference remains RLT's genuinely attractive property: the trained weights run as an ordinary parallel
+  transformer.</p>
+</section>
+
+<section class="vbg-section">
+  <h2 class="vbg-heading-24">Method and limits</h2>
+  <div class="vbg-reading">
+    <h3 class="vbg-heading-20">Tasks</h3>
+    <p>Parity: read a binary token stream and report whether the number of ones so far is even; chance is 50%.
+    Five-state composition: apply one to five random permutations of a five-element set and report the final
+    mapping; chance is 20%. Parity comes from the RLT paper; five-state is the composition probe the paper scales
+    up.</p>
+    <h3 class="vbg-heading-20">A documented deviation</h3>
+    <p>The paper trains parity on the final token only. In pilot runs, sparse final-token targets never left chance
+    for any architecture at this budget, so we train on the running parity at every position and score final-token
+    accuracy. The deviation is recorded in every results file.</p>
+    <h3 class="vbg-heading-20">Protocol</h3>
+    <p>Adam at a learning rate of 3e-3, batch 64, 2,500 steps, sinusoidal positions, matched parameter counts
+    (75,648 to 83,552), three seeds per configuration, CPU only. This page and every number on it are generated
+    from the raw run files by scripts in the repository.</p>
+    <h3 class="vbg-heading-20">What did not reproduce</h3>
+    <p>The repo's published synthetic runs show RLT crashing from 100 to 61% parity between 64 and 128 operations.
+    Under our generator, no recurrent model degrades at four times the training length. We attribute the difference
+    to task construction and supervision rather than to the architectures.</p>
+    <h3 class="vbg-heading-20">Limits</h3>
+    <p>One small task generator, one hardware class, three seeds. Cost ratios are robust; absolute milliseconds are
+    not. The 75K-parameter regime cannot validate claims the paper makes at 10M+ parameters.</p>
+  </div>
+</section>
+
+<section class="vbg-section">
+  <h2 class="vbg-heading-24">Accuracy by evaluation length</h2>
+  <p class="vbg-lede">Models trained at 32 operations, evaluated at up to four times that length. No recurrent
+  model degrades with length under this generator; training lengths beyond the budget were not tested.</p>
+  
+  <h3 class="vbg-heading-16">Parity, mean of three seeds</h3>
+  <div class="vbg-table-wrap">
+    <table>
+      <caption class="vbg-visually-hidden">Accuracy by evaluation length, parity.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Model</th>
+          <th scope="col" class="vbg-numeric">Year</th>
+          <th scope="col" class="vbg-numeric">16 ops</th>
+          <th scope="col" class="vbg-numeric">32 ops</th>
+          <th scope="col" class="vbg-numeric">64 ops</th>
+          <th scope="col" class="vbg-numeric">128 ops</th>
+        </tr>
+      </thead>
+      <tbody><tr><th scope="row">Elman RNN</th><td class="vbg-numeric">1990</td><td class="vbg-numeric">100.0</td><td class="vbg-numeric">100.0</td><td class="vbg-numeric">100.0</td><td class="vbg-numeric">100.0</td></tr><tr><th scope="row">LSTM</th><td class="vbg-numeric">1997</td><td class="vbg-numeric">80.3</td><td class="vbg-numeric">81.2</td><td class="vbg-numeric">80.8</td><td class="vbg-numeric">80.7</td></tr><tr><th scope="row">GRU</th><td class="vbg-numeric">2014</td><td class="vbg-numeric">98.3</td><td class="vbg-numeric">98.3</td><td class="vbg-numeric">98.2</td><td class="vbg-numeric">98.1</td></tr><tr><th scope="row">Transformer</th><td class="vbg-numeric">2017</td><td class="vbg-numeric">44.8</td><td class="vbg-numeric">46.9</td><td class="vbg-numeric">50.3</td><td class="vbg-numeric">49.2</td></tr><tr><th scope="row">Token merge (ablation)</th><td class="vbg-numeric">2025</td><td class="vbg-numeric">77.2</td><td class="vbg-numeric">76.4</td><td class="vbg-numeric">76.5</td><td class="vbg-numeric">77.3</td></tr><tr><th scope="row">RLT-style</th><td class="vbg-numeric">2026</td><td class="vbg-numeric">66.5</td><td class="vbg-numeric">67.0</td><td class="vbg-numeric">65.9</td><td class="vbg-numeric">66.8</td></tr></tbody>
+    </table>
+  </div>
+  <p class="vbg-note">Worst seed at the trained length: token merge 47.5, RLT-style 50.9, transformer 46.0, LSTM 69.7; every other model stays above 95%.</p>
+
+  
+  <h3 class="vbg-heading-16">Five-state composition, mean of three seeds</h3>
+  <div class="vbg-table-wrap">
+    <table>
+      <caption class="vbg-visually-hidden">Accuracy by evaluation length, five-state composition.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Model</th>
+          <th scope="col" class="vbg-numeric">Year</th>
+          <th scope="col" class="vbg-numeric">16 ops</th>
+          <th scope="col" class="vbg-numeric">32 ops</th>
+          <th scope="col" class="vbg-numeric">64 ops</th>
+          <th scope="col" class="vbg-numeric">128 ops</th>
+        </tr>
+      </thead>
+      <tbody><tr><th scope="row">Elman RNN</th><td class="vbg-numeric">1990</td><td class="vbg-numeric">91.5</td><td class="vbg-numeric">98.6</td><td class="vbg-numeric">99.9</td><td class="vbg-numeric">100.0</td></tr><tr><th scope="row">LSTM</th><td class="vbg-numeric">1997</td><td class="vbg-numeric">90.6</td><td class="vbg-numeric">98.7</td><td class="vbg-numeric">99.9</td><td class="vbg-numeric">100.0</td></tr><tr><th scope="row">GRU</th><td class="vbg-numeric">2014</td><td class="vbg-numeric">90.8</td><td class="vbg-numeric">98.6</td><td class="vbg-numeric">99.9</td><td class="vbg-numeric">100.0</td></tr><tr><th scope="row">Transformer</th><td class="vbg-numeric">2017</td><td class="vbg-numeric">27.5</td><td class="vbg-numeric">37.3</td><td class="vbg-numeric">30.6</td><td class="vbg-numeric">31.4</td></tr><tr><th scope="row">Token merge (ablation)</th><td class="vbg-numeric">2025</td><td class="vbg-numeric">93.2</td><td class="vbg-numeric">98.8</td><td class="vbg-numeric">99.9</td><td class="vbg-numeric">100.0</td></tr><tr><th scope="row">RLT-style</th><td class="vbg-numeric">2026</td><td class="vbg-numeric">89.4</td><td class="vbg-numeric">98.4</td><td class="vbg-numeric">100.0</td><td class="vbg-numeric">100.0</td></tr></tbody>
+    </table>
+  </div>
+  <p class="vbg-note">Worst seed at the trained length: transformer 29.8; every other model stays above 96%.</p>
+
+</section>
+
+<section class="vbg-section">
+  <h2 class="vbg-heading-24">The repo's published synthetic runs, for the record</h2>
+  <p class="vbg-lede">Preliminary results contributed in the RLT repository, transcribed from their figure.
+  Around 79K parameters, three seeds, FLOPs not matched.</p>
+  <div class="vbg-table-wrap">
+    <table>
+      <caption class="vbg-visually-hidden">Published synthetic accuracy from the RLT repository.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Model</th>
+          <th scope="col" class="vbg-numeric">Parity 32</th>
+          <th scope="col" class="vbg-numeric">Parity 64</th>
+          <th scope="col" class="vbg-numeric">Parity 128</th>
+          <th scope="col" class="vbg-numeric">Five 32</th>
+          <th scope="col" class="vbg-numeric">Five 64</th>
+          <th scope="col" class="vbg-numeric">Five 128</th>
+        </tr>
+      </thead>
+      <tbody><tr><th scope="row">RLT</th><td class="vbg-numeric">100</td><td class="vbg-numeric">82</td><td class="vbg-numeric">60.8</td></tr><tr><th scope="row">Transformer</th><td class="vbg-numeric">72</td><td class="vbg-numeric">50</td><td class="vbg-numeric">48</td></tr><tr><th scope="row">Token merge</th><td class="vbg-numeric">59</td><td class="vbg-numeric">49</td><td class="vbg-numeric">50</td></tr><tr><th scope="row">RLT</th><td class="vbg-numeric">100</td><td class="vbg-numeric">49</td><td class="vbg-numeric">20.7</td></tr><tr><th scope="row">Transformer</th><td class="vbg-numeric">24</td><td class="vbg-numeric">20</td><td class="vbg-numeric">21</td></tr><tr><th scope="row">Token merge</th><td class="vbg-numeric">23</td><td class="vbg-numeric">20</td><td class="vbg-numeric">20</td></tr></tbody>
+    </table>
+  </div>
+  <p class="vbg-note">In their generator, RLT crashes at long programs; in ours, it holds but never leads. The two
+  setups differ in task generator and supervision, so the disagreement is about task construction as much as
+  architecture.</p>
+</section>
+
+<section class="vbg-section">
+  <h2 class="vbg-heading-24">Sources</h2>
+  <div class="vbg-sources">
+    <ul>
+      <li>RLT paper and code: <a href="https://github.com/yifanzhang-pro/recurrent-looped-transformer">yifanzhang-pro/recurrent-looped-transformer</a> (Yifan Zhang, September 2026)</li>
+      <li>Benchmark code: <code>rlt-research/bench.py</code> and <code>rlt-research/run_all.py</code> in this repository</li>
+      <li>Raw runs: 36 files in <code>rlt-research/results/</code>; aggregates in <code>rlt-research/data/our_results.json</code></li>
+      <li>Published-figure transcription: <code>rlt-research/data/rlt_repo_published.json</code></li>
+    </ul>
+  </div>
+</section>
+
+  </main>
+  <footer class="vbg-footer">
+    <span>Independent benchmark of RLT at matched parameters, September 2026</span>
+  </footer>
+</div>
+</body>
+</html>

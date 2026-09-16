@@ -1,0 +1,31 @@
+[token_merge/five/s1] params=83552
+  step 0 loss 2.8713
+  step 500 loss 0.0006
+  step 1000 loss 0.0002
+  step 1500 loss 0.0001
+  step 2000 loss 0.0001
+{
+  "model": "token_merge",
+  "task": "five",
+  "seed": 1,
+  "params": 83552,
+  "steps": 2500,
+  "batch": 64,
+  "train_ops": 32,
+  "supervision": "sparse_final_state",
+  "acc": {
+    "16": 99.609375,
+    "32": 99.853515625,
+    "64": 100.0,
+    "128": 100.0
+  },
+  "eval_ms_per_program": {
+    "16": 0.542014261696977,
+    "32": 1.143611734875094,
+    "64": 2.37669592283396,
+    "128": 4.547247232920881
+  },
+  "train_ms_per_step": 261.1438721693121,
+  "final_loss": 7.608640124090015e-05,
+  "train_seconds": 663.7582233330468
+}

@@ -1,0 +1,31 @@
+[elman/five/s2] params=78720
+  step 0 loss 2.3971
+  step 500 loss 0.0141
+  step 1000 loss 0.0217
+  step 1500 loss 0.0076
+  step 2000 loss 0.0138
+{
+  "model": "elman",
+  "task": "five",
+  "seed": 2,
+  "params": 78720,
+  "steps": 2500,
+  "batch": 64,
+  "train_ops": 32,
+  "supervision": "sparse_final_state",
+  "acc": {
+    "16": 95.8984375,
+    "32": 99.951171875,
+    "64": 100.0,
+    "128": 100.0
+  },
+  "eval_ms_per_program": {
+    "16": 0.09168485496502399,
+    "32": 0.20761663819257592,
+    "64": 0.4209676513937666,
+    "128": 0.7277449541049918
+  },
+  "train_ms_per_step": 35.66742457426153,
+  "final_loss": 0.013236329252831637,
+  "train_seconds": 107.5273476250004
+}

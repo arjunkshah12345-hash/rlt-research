@@ -1,0 +1,31 @@
+[rlt/parity/s0] params=75000
+  step 0 loss 1.4363
+  step 500 loss 0.0003
+  step 1000 loss 0.0001
+  step 1500 loss 0.0001
+  step 2000 loss 0.0000
+{
+  "model": "rlt",
+  "task": "parity",
+  "seed": 0,
+  "params": 75000,
+  "steps": 2500,
+  "batch": 64,
+  "train_ops": 32,
+  "supervision": "dense_running_parity",
+  "acc": {
+    "16": 83.30078125,
+    "32": 82.275390625,
+    "64": 82.2265625,
+    "128": 82.421875
+  },
+  "eval_ms_per_program": {
+    "16": 0.7095271606374354,
+    "32": 1.3818873701154644,
+    "64": 3.203352091304623,
+    "128": 10.19246891308967
+  },
+  "train_ms_per_step": 353.7470046125818,
+  "final_loss": 3.74349697449361e-05,
+  "train_seconds": 920.8286148749758
+}

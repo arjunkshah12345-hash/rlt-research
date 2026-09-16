@@ -1,0 +1,31 @@
+[gru/parity/s2] params=77280
+  step 0 loss 1.4737
+  step 500 loss 0.0001
+  step 1000 loss 0.0000
+  step 1500 loss 0.0000
+  step 2000 loss 0.0000
+{
+  "model": "gru",
+  "task": "parity",
+  "seed": 2,
+  "params": 77280,
+  "steps": 2500,
+  "batch": 64,
+  "train_ops": 32,
+  "supervision": "dense_running_parity",
+  "acc": {
+    "16": 98.6328125,
+    "32": 98.291015625,
+    "64": 98.6328125,
+    "128": 98.681640625
+  },
+  "eval_ms_per_program": {
+    "16": 0.12787331149866077,
+    "32": 0.27926914503950684,
+    "64": 0.5817440590760725,
+    "128": 1.0100642905399582
+  },
+  "train_ms_per_step": 58.20989798964001,
+  "final_loss": 1.4622577145928517e-05,
+  "train_seconds": 146.77200037497096
+}

@@ -1,0 +1,31 @@
+[lstm/five/s2] params=76800
+  step 0 loss 2.6029
+  step 500 loss 0.0085
+  step 1000 loss 0.0236
+  step 1500 loss 0.0070
+  step 2000 loss 0.0122
+{
+  "model": "lstm",
+  "task": "five",
+  "seed": 2,
+  "params": 76800,
+  "steps": 2500,
+  "batch": 64,
+  "train_ops": 32,
+  "supervision": "sparse_final_state",
+  "acc": {
+    "16": 95.80078125,
+    "32": 99.951171875,
+    "64": 100.0,
+    "128": 100.0
+  },
+  "eval_ms_per_program": {
+    "16": 0.11823256446064079,
+    "32": 0.24757057715873998,
+    "64": 0.5273549804485356,
+    "128": 1.0482855630016275
+  },
+  "train_ms_per_step": 51.986670519807376,
+  "final_loss": 0.014479974173009396,
+  "train_seconds": 126.70976370800054
+}

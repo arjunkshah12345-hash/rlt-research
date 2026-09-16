@@ -1,0 +1,31 @@
+[rlt/five/s2] params=75480
+  step 0 loss 2.2516
+  step 500 loss 0.0522
+  step 1000 loss 0.0274
+  step 1500 loss 0.0085
+  step 2000 loss 0.0104
+{
+  "model": "rlt",
+  "task": "five",
+  "seed": 2,
+  "params": 75480,
+  "steps": 2500,
+  "batch": 64,
+  "train_ops": 32,
+  "supervision": "sparse_final_state",
+  "acc": {
+    "16": 96.09375,
+    "32": 99.951171875,
+    "64": 100.0,
+    "128": 100.0
+  },
+  "eval_ms_per_program": {
+    "16": 0.48309222412967756,
+    "32": 1.2514540610482072,
+    "64": 3.543570638186111,
+    "128": 9.985699808595427
+  },
+  "train_ms_per_step": 324.8197994113434,
+  "final_loss": 0.016455905596958472,
+  "train_seconds": 979.4526073340094
+}

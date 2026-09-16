@@ -1,0 +1,31 @@
+[transformer/five/s1] params=77280
+  step 0 loss 2.8126
+  step 500 loss 1.2198
+  step 1000 loss 1.0763
+  step 1500 loss 0.9899
+  step 2000 loss 0.9113
+{
+  "model": "transformer",
+  "task": "five",
+  "seed": 1,
+  "params": 77280,
+  "steps": 2500,
+  "batch": 64,
+  "train_ops": 32,
+  "supervision": "sparse_final_state",
+  "acc": {
+    "16": 26.318359375,
+    "32": 39.599609375,
+    "64": 28.662109375,
+    "128": 27.83203125
+  },
+  "eval_ms_per_program": {
+    "16": 0.23962388087284126,
+    "32": 0.454866902316553,
+    "64": 0.8458858032156513,
+    "128": 2.2034763998988183
+  },
+  "train_ms_per_step": 86.33764533756766,
+  "final_loss": 0.8577877968549729,
+  "train_seconds": 222.68649887497304
+}

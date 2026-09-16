@@ -1,0 +1,31 @@
+[transformer/parity/s1] params=76608
+  step 0 loss 1.6614
+  step 500 loss 0.4286
+  step 1000 loss 0.2312
+  step 1500 loss 0.1591
+  step 2000 loss 0.0260
+{
+  "model": "transformer",
+  "task": "parity",
+  "seed": 1,
+  "params": 76608,
+  "steps": 2500,
+  "batch": 64,
+  "train_ops": 32,
+  "supervision": "dense_running_parity",
+  "acc": {
+    "16": 39.453125,
+    "32": 45.99609375,
+    "64": 50.78125,
+    "128": 47.55859375
+  },
+  "eval_ms_per_program": {
+    "16": 0.20297178124906168,
+    "32": 0.44783815528148807,
+    "64": 0.8332055664084237,
+    "128": 1.9251983642618598
+  },
+  "train_ms_per_step": 83.34244563058019,
+  "final_loss": 0.010133433672599494,
+  "train_seconds": 224.13106862502173
+}

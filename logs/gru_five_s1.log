@@ -1,0 +1,31 @@
+[gru/five/s1] params=78624
+  step 0 loss 2.6760
+  step 500 loss 0.0009
+  step 1000 loss 0.0003
+  step 1500 loss 0.0002
+  step 2000 loss 0.0001
+{
+  "model": "gru",
+  "task": "five",
+  "seed": 1,
+  "params": 78624,
+  "steps": 2500,
+  "batch": 64,
+  "train_ops": 32,
+  "supervision": "sparse_final_state",
+  "acc": {
+    "16": 94.970703125,
+    "32": 99.658203125,
+    "64": 100.0,
+    "128": 100.0
+  },
+  "eval_ms_per_program": {
+    "16": 0.08494287109783727,
+    "32": 0.17347859716210223,
+    "64": 0.34930818702605393,
+    "128": 0.8569835000002968
+  },
+  "train_ms_per_step": 38.06814675871283,
+  "final_loss": 0.00011027833636035212,
+  "train_seconds": 114.99481520801783
+}
