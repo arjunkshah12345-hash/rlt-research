@@ -11,15 +11,18 @@ plus an original apples-to-apples benchmark spanning 1951→2026 sequence archit
 - `data/rlt_repo_published.json` — the repo's own published synthetic numbers
 - `data/our_results.json` — aggregated means/min/max over seeds (generated)
 - `make_charts.py` — generates all PNG charts from raw JSON (no hand-typed data)
-- `update_site.py` — injects real results into the website
+- `build_vbg_site.py` — regenerates `site/index.html` from `results/` + `data/` (every number on the page is machine-derived)
+- `update_site.py`, `gen_site_data.py` — legacy helpers from the first site iteration (unused by the current design)
 - `charts/*.png` — bar charts + curves
-- `site/index.html` — the ultra-minimalist interactive website
+- `site/index.html` — the minimalist report site (generated artifact)
+
+Live report: https://arjunkshah12345-hash.github.io/rlt-research/site/
 
 ## Reproduce
 ```
-python3 run_all.py        # ~40 min on a 10-core CPU (MacBook Pro)
+python3 run_all.py          # ~40 min on a 10-core CPU (MacBook Pro)
 python3 make_charts.py
-python3 update_site.py
+python3 build_vbg_site.py   # regenerates site/index.html from the raw results
 open site/index.html
 ```
 

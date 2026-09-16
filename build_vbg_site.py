@@ -48,7 +48,9 @@ def seeds(task, model, L):
     return sorted(per_seed[(task, model, L)])
 
 def ms_per_step(model):
-    return per_seed[("parity", model, "ms")]
+    # All-run mean (3 parity + 3 five seeds), matching data/our_results.json meta
+    # so the page, the aggregate JSON, and the README quote the same number.
+    return OURS["meta"][model]["train_ms_per_step"]
 
 def params(model):
     return OURS["meta"][model]["params"]
@@ -253,12 +255,10 @@ CHART_SECTION = f"""
 
 # ---------------------------------------------------------------- cost
 def cost_rows():
-    t_vals = ms_per_step("transformer")
-    t_ms = sum(t_vals) / len(t_vals)
+    t_ms = ms_per_step("transformer")
     rows = []
     for mid, name, _yr in MODELS:
-        vals = ms_per_step(mid)
-        ms = sum(vals) / len(vals)
+        ms = ms_per_step(mid)
         rows.append(
             f'<tr><th scope="row">{name}</th>'
             f'<td class="vbg-numeric">{params(mid):,}</td>'
@@ -430,9 +430,9 @@ SOURCES = """
   <div class="vbg-sources">
     <ul>
       <li>RLT paper and code: <a href="https://github.com/yifanzhang-pro/recurrent-looped-transformer">yifanzhang-pro/recurrent-looped-transformer</a> (Yifan Zhang, September 2026)</li>
-      <li>Benchmark code: <code>rlt-research/bench.py</code> and <code>rlt-research/run_all.py</code> in this repository</li>
-      <li>Raw runs: 36 files in <code>rlt-research/results/</code>; aggregates in <code>rlt-research/data/our_results.json</code></li>
-      <li>Published-figure transcription: <code>rlt-research/data/rlt_repo_published.json</code></li>
+      <li>Benchmark code: <code>bench.py</code> and <code>run_all.py</code> in this repository</li>
+      <li>Raw runs: 36 files in <code>results/</code>; aggregates in <code>data/our_results.json</code></li>
+      <li>Published-figure transcription: <code>data/rlt_repo_published.json</code></li>
     </ul>
   </div>
 </section>

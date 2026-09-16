@@ -8,9 +8,8 @@
  * GeistCN src/styles/components/design-system.css SHA-256:
  * a78c1328cc1ad27bc3832f2568f7cef35cfa61271ae636d0e6889ee2c0eeecb8
  *
- * Public reports load Geist from the HTML head. The Vercel identity primitives
- * below use the stable public wordmark and logo URLs as masks so currentColor
- * follows the report theme. The font stacks retain system fallbacks.
+ * The report loads Geist from the HTML head. The font stacks retain system
+ * fallbacks.
  */
 
 :where(.vbg-report) {
@@ -511,18 +510,6 @@
 :where(.vbg-report) .vbg-masthead > * {
   grid-column: 1 / -1;
   min-width: 0;
-}
-
-@supports selector(.vbg-masthead:has(> .vbg-identity)) {
-  :where(.vbg-report) .vbg-masthead:has(> .vbg-identity):has(> .vbg-document-meta) > .vbg-identity {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  :where(.vbg-report) .vbg-masthead:has(> .vbg-identity):has(> .vbg-document-meta) > .vbg-document-meta {
-    grid-column: 2;
-    grid-row: 1;
-  }
 }
 
 :where(.vbg-report) .vbg-header > .vbg-masthead + :where(h1, .vbg-title, .vbg-display) {

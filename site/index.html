@@ -100,7 +100,7 @@
           <th scope="col" class="vbg-numeric">Relative to transformer</th>
         </tr>
       </thead>
-      <tbody><tr><th scope="row">Elman RNN</th><td class="vbg-numeric">76,416</td><td class="vbg-numeric">47.7</td><td class="vbg-numeric">0.6&times;</td></tr><tr><th scope="row">LSTM</th><td class="vbg-numeric">75,648</td><td class="vbg-numeric">57.9</td><td class="vbg-numeric">0.7&times;</td></tr><tr><th scope="row">GRU</th><td class="vbg-numeric">78,624</td><td class="vbg-numeric">59.2</td><td class="vbg-numeric">0.7&times;</td></tr><tr><th scope="row">Transformer</th><td class="vbg-numeric">77,280</td><td class="vbg-numeric">83.0</td><td class="vbg-numeric">1.0&times;</td></tr><tr><th scope="row">Token merge (ablation)</th><td class="vbg-numeric">83,552</td><td class="vbg-numeric">222.8</td><td class="vbg-numeric">2.7&times;</td></tr><tr><th scope="row">RLT-style</th><td class="vbg-numeric">75,000</td><td class="vbg-numeric">357.1</td><td class="vbg-numeric">4.3&times;</td></tr></tbody>
+      <tbody><tr><th scope="row">Elman RNN</th><td class="vbg-numeric">76,416</td><td class="vbg-numeric">41.7</td><td class="vbg-numeric">0.5&times;</td></tr><tr><th scope="row">LSTM</th><td class="vbg-numeric">75,648</td><td class="vbg-numeric">54.9</td><td class="vbg-numeric">0.6&times;</td></tr><tr><th scope="row">GRU</th><td class="vbg-numeric">78,624</td><td class="vbg-numeric">49.1</td><td class="vbg-numeric">0.6&times;</td></tr><tr><th scope="row">Transformer</th><td class="vbg-numeric">77,280</td><td class="vbg-numeric">84.7</td><td class="vbg-numeric">1.0&times;</td></tr><tr><th scope="row">Token merge (ablation)</th><td class="vbg-numeric">83,552</td><td class="vbg-numeric">240.9</td><td class="vbg-numeric">2.8&times;</td></tr><tr><th scope="row">RLT-style</th><td class="vbg-numeric">75,000</td><td class="vbg-numeric">342.0</td><td class="vbg-numeric">4.0&times;</td></tr></tbody>
     </table>
   </div>
   <p class="vbg-note">A trained RLT model runs as a standard parallel transformer, so the sequential cost applies
@@ -226,9 +226,9 @@
   <div class="vbg-sources">
     <ul>
       <li>RLT paper and code: <a href="https://github.com/yifanzhang-pro/recurrent-looped-transformer">yifanzhang-pro/recurrent-looped-transformer</a> (Yifan Zhang, September 2026)</li>
-      <li>Benchmark code: <code>rlt-research/bench.py</code> and <code>rlt-research/run_all.py</code> in this repository</li>
-      <li>Raw runs: 36 files in <code>rlt-research/results/</code>; aggregates in <code>rlt-research/data/our_results.json</code></li>
-      <li>Published-figure transcription: <code>rlt-research/data/rlt_repo_published.json</code></li>
+      <li>Benchmark code: <code>bench.py</code> and <code>run_all.py</code> in this repository</li>
+      <li>Raw runs: 36 files in <code>results/</code>; aggregates in <code>data/our_results.json</code></li>
+      <li>Published-figure transcription: <code>data/rlt_repo_published.json</code></li>
     </ul>
   </div>
 </section>
